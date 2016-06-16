@@ -1,0 +1,30 @@
+public class Solution {
+    public List<List<Integer>> permute(int[] nums) {
+        List<List<Integer>> arrAll = new ArrayList<List<Integer>>();
+        backTrack(0, nums, arrAll);
+        return arrAll;
+    }
+    
+    private void backTrack(int i, int[] nums, List<List<Integer>> arrAll) {
+        if(i>=nums.length) {
+            List<Integer> arr = new ArrayList<Integer>();
+            for (int a : nums) {
+                arr.add(a);
+            }
+            arrAll.add(arr);
+            return;
+        }
+        
+        for(int k=i; k<nums.length; k++) {
+            exch(nums, i, k);
+            backTrack(i+1, nums, arrAll);
+            exch(nums, i, k);
+        }
+    }
+    
+    private void exch(int[] nums, int i, int k) {
+        int temp = nums[i];
+        nums[i] = nums[k];
+        nums[k] = temp;
+    }
+}
